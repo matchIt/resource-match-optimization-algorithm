@@ -6,7 +6,7 @@ random staff counts, carrying capitities, etc
 """
 import numpy as np
 import random as rn
-from faker import Faker
+from faker import Faker #run 'pip install faker' first
 
 def generate_Random_LatLong_Within_RectArea(count,long_range,lat_range):
     """
