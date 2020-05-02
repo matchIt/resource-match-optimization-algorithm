@@ -42,10 +42,25 @@ def randomInventoryGenerator(items):
         {'name': item,'unit_price': rn.randrange(100,200),'quantity':rn.randrange(50,100)} for item in items
     ]
 
+def randomVendorGenerator(count,long_range,lat_range):
+    coords = generate_Random_LatLong_Within_RectArea(count,long_range,lat_range)
+    return [
+        {
+            'name': getRandomVendorName(),
+            'vendor_id': i,
+            'inventory': randomInventoryGenerator(items),
+            'location': coords[i],
+            'documents': [] #not relevant for the algorithm's purposes
+        } for i in range(count)
+    ]
 
 def getRandomFacilityName():
     fake = Faker()
     return fake.name() + ' memorial hospital'
+
+def getRandomVendorName():
+    fake = Faker()
+    return fake.name() + ' solutions'
 
 def randomFacilitiesGenerator(count,long_range,lat_range):
     """
@@ -58,6 +73,7 @@ def randomFacilitiesGenerator(count,long_range,lat_range):
         {
             'name': getRandomFacilityName(),
             'location': coords[i],
+            'facility_id': i,
             'requests': randomRequestGenerator(items),
             'carrying_capacity': carrying_capacities[i],
             'covid_testing_available': rn.choice([True,False]),
